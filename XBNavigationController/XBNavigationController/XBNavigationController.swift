@@ -22,6 +22,12 @@ class XBWrapController : UIViewController{
         set {super.hidesBottomBarWhenPushed = newValue}
     }
     
+    
+    override var tabBarItem: UITabBarItem!{
+        get {return self.rootViewController.tabBarItem}
+        set{ super.tabBarItem = newValue}
+    }
+    
     override var title: String?{
         get {return self.rootViewController.title}
         set {super.title = newValue}
@@ -31,14 +37,8 @@ class XBWrapController : UIViewController{
         get {return self.rootViewController}
     }
     
-}
-
-
-
-extension String{
-    func abc(str : String)->String?{
-        return nil
-    }
+    
+    
 }
 
 
@@ -176,15 +176,18 @@ class XBNavigationController: UINavigationController {
             }
         }
         set {
-            if (self.rootNavigationController != nil) {
-                self.rootNavigationController?.isToolbarHidden  = newValue;
-            }else{
-                super.isToolbarHidden = newValue
-            }
+            super.isToolbarHidden = newValue
         }
     }
     
     
+    
+    override func setToolbarHidden(_ hidden: Bool, animated: Bool) {
+        if (self.rootNavigationController != nil) {
+            return (self.rootNavigationController? .setToolbarHidden(hidden, animated:animated))!
+        }
+        super .setToolbarHidden(hidden, animated: animated)
+    }
     
     override var toolbar: UIToolbar!{
         get {
@@ -203,7 +206,6 @@ class XBNavigationController: UINavigationController {
            
             if(super.viewControllers.count > 0){
                 var temp = [UIViewController]()
-                
                     viewControllers.forEach { (vc) in
                     let v = self.wrapNavigationController(viewController: vc);
                     if ((v) != nil){
