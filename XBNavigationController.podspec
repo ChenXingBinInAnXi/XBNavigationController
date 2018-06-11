@@ -12,5 +12,5 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/ChenXingBinInAnXi/XBNavigationController.git", :tag => s.version }
   s.requires_arc = true
   s.ios.deployment_target = "8.0"
-  s.source_files  = "XBNavigationController/XBNavigationController/*.{h,m}"
+  s.source_files  = "XBNavigationController/XBNavigationController/*.swift"
 end
